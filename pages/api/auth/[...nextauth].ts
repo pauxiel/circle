@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from 'next-auth/providers/github'
+import MailchimpProvider from 'next-auth/providers/mailchimp'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '../../../lib/prisma'
 
@@ -23,6 +24,20 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name || profile.login,
+          username: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+        }
+      },
+    }),
+
+    MailchimpProvider({
+      clientId: process.env.MAILCHIMP_CLIENT_ID,
+      clientSecret: process.env.MAILCHIMP_CLIENT_SECRET,
       profile(profile) {
         return {
           id: profile.id.toString(),

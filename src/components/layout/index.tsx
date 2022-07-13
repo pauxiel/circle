@@ -5,13 +5,11 @@ type Props = PropsWithChildren<{}>
 
 function Layout({ children }: Props) {
   return (
-    <Container>
-      <VStack>
-        {/* header */}
-        {children}
-        {/* footer */}
-      </VStack>
-    </Container>
+    <>
+      {/* header */}
+      {children}
+      {/* footer */}
+    </>
   )
 }
 
