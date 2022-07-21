@@ -29,7 +29,7 @@ function Onboarding() {
     if (res.status === 200) {
       const u = await axios(updateUser)
       if (u.status === 200) {
-        router.push('/')
+        router.reload()
         console.log('loaded')
       }
     } else {
@@ -62,7 +62,7 @@ function Onboarding() {
         <FormLabel>Which industry are you working in</FormLabel>
         <Input
           placeholder="E.g Product Designer"
-          {...register('Interest', { required: true })}
+          {...register('interest', { required: true })}
         />
 
         <FormLabel>Bio</FormLabel>
