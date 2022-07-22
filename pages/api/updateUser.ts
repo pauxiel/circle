@@ -13,33 +13,24 @@ export default async function (req, res) {
 
   const isUserOnboarded = await prisma.user.findFirst({
     where: {
-      email: { connect: { email: session.user.email } },
+      email: session.user.email,
 
       onboarded: false,
     },
   })
 
+  const UserOnboarded = await prisma.user.update({
+    data: {
+      onboarded: true,
+    },
+    where: {
+      email: session.user.email,
+    },
+  })
+
   if (!isUserOnboarded) {
-    // onboard User
-    await prisma.user.update({
-      data: {
-        onboarded: true,
-      },
-      where: {
-        email: { connect: { email: session.user.email } },
-      },
-    })
+    return res.status(200).json(UserOnboarded)
   }
 
-  // const updateUser = await prisma.user.update({
-  //   where: {
-  //     onboarded: false,
-  //   },
-  //   data: {
-  //     onboarded: true,
-  //   },
-  // })
-
-  //   console.log(profile)
-  // return res.status(200).json(updateUser)
+  // return res.status(200).json(UserOnboarded)
 }

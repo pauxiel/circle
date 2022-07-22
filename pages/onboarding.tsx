@@ -28,10 +28,11 @@ function Onboarding() {
     const res = await axios(config)
     if (res.status === 200) {
       const u = await axios(updateUser)
-      if (u.status === 200) {
-        router.reload()
-        console.log('loaded')
-      }
+      // if (u.status === 200) {
+      //   router.push('/index')
+      //   console.log('loaded')
+      // }
+      if (u.status === 200) router.push('/', '/')
     } else {
       console.log('not loaded')
     }
@@ -46,18 +47,18 @@ function Onboarding() {
           {...register('username', { required: true })}
         />
 
-        {/* <Select
+        <Select
           placeholder="Select option"
           {...register('userCategory', { required: true })}
         >
           <option value="Active Member">Active Member</option>
           <option value="Community Manager">Community Manager</option>
-        </Select> */}
+        </Select>
 
-        <Input
+        {/* <Input
           placeholder="category"
           {...register('userCategory', { required: true })}
-        />
+        /> */}
 
         <FormLabel>Which industry are you working in</FormLabel>
         <Input
