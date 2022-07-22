@@ -63,8 +63,6 @@ function Login() {
     signIn('email', { email, redirect: false })
   }
   return (
-  
-
     <SimpleGrid
       columns={{
         base: 1,

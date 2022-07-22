@@ -11,14 +11,13 @@ export default async function (req, res) {
     return res.status(401)
   }
 
-  const UserOnboarded = await prisma.user.update({
-    data: {
-      onboarded: true,
-    },
+  const isUserOnboarded = await prisma.user.findFirst({
     where: {
       email: session.user.email,
+
+      onboarded: false,
     },
   })
 
-  return res.status(200).json(UserOnboarded)
+  return res.status(200).json(isUserOnboarded)
 }
