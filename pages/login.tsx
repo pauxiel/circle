@@ -1,4 +1,5 @@
 import { getSession, signIn } from 'next-auth/react'
+import useRequireAuth from '../lib/useRequireAuth'
 import {
   Box,
   VStack,
@@ -44,6 +45,17 @@ const providers = [
 function Login() {
   const [email, setEmail] = useState<string>('')
 
+  // const session = useRequireAuth()
+
+  // if (session) {
+  //   return {
+  //     redirect: {
+  //       destination: '/onboarding',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!email) return false
@@ -51,72 +63,6 @@ function Login() {
     signIn('email', { email, redirect: false })
   }
   return (
-    // <Flex
-    //   direction={{
-    //     base: 'column',
-    //     md: 'row',
-    //   }}
-    //   px={8}
-    //   py={24}
-    //   mx="auto"
-    // >
-    //   <Box
-    //     w={{
-    //       base: 'full',
-    //       md: 11 / 12,
-    //       xl: 9 / 12,
-    //     }}
-    //     mx="auto"
-    //     pr={{
-    //       md: 20,
-    //     }}
-    //   >
-    //     <chakra.h1 mb={6}>
-    //       Communities where you can grow and connect within your circle
-    //     </chakra.h1>
-    //     <chakra.p>
-    //       Join the talent-driven communites and members and find opportunites
-    //     </chakra.p>
-    //     <chakra.form onSubmit={handleSubmit}>
-    //       <FormLabel>Email Address</FormLabel>
-    //       <Input type="email" onChange={(e) => setEmail(e.target.value)} />
-    //       <Button type="submit" w="100%">
-    //         Get Started
-    //       </Button>
-    //     </chakra.form>
-    //     <VStack>
-    //       {providers.map(({ name, Icon }) => (
-    //         <Button
-    //           key={name}
-    //           leftIcon={<Icon />}
-    //           w="100%"
-    //           onClick={() => signIn(name)}
-    //         >
-    //           Sign in with {name}
-    //         </Button>
-    //       ))}
-    //     </VStack>
-    //   </Box>
-    //   <Box>
-    //     <Box
-    //       w={{
-    //         base: 'full',
-    //         md: 10 / 12,
-    //       }}
-    //       mx="auto"
-    //       textAlign="center"
-    //     >
-    //       <Image
-    //         w="full"
-    //         rounded="lg"
-    //         shadow="2xl"
-    //         src="https://kutty.netlify.app/hero.jpg"
-    //         alt="Hellonext feedback boards software screenshot"
-    //       />
-    //     </Box>
-    //   </Box>
-    // </Flex>
-
     <SimpleGrid
       columns={{
         base: 1,
