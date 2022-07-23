@@ -1,10 +1,46 @@
-import { chakra, Input, FormLabel, Select, Button } from '@chakra-ui/react'
+import { chakra, Input, FormLabel, Button, Box, Select } from '@chakra-ui/react'
+import { useState } from 'react'
+// import Select from 'react-select'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
+
+const MAX_STEPS = 2
 
 function Onboarding() {
-  const { register, handleSubmit } = useForm()
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'all',
+  })
+  const [formStep, setFormStep] = useState(0)
+  const [category, setCategory] = useState()
+
+  const completeFormStep = () => {
+    setFormStep((cur) => cur + 1)
+  }
+
+  const renderButton = () => {
+    if (formStep > 1) {
+      return undefined
+    } else if (formStep === 1) {
+      return (
+        <Button disabled={!isValid} type="submit">
+          Submit
+        </Button>
+      )
+    } else {
+      return (
+        <Button disabled={!isValid} type="button" onClick={completeFormStep}>
+          Next Step
+        </Button>
+      )
+    }
+  }
+
   const router = useRouter()
 
   const onSubmitForm = async (values) => {
@@ -37,42 +73,82 @@ function Onboarding() {
       console.log('not loaded')
     }
   }
+
+  const options = [
+    { value: 'Active Member', label: 'Active Member' },
+    { value: 'Community Manager', label: 'Community Manager' },
+  ]
   return (
     <>
       <chakra.form onSubmit={handleSubmit(onSubmitForm)}>
-        <FormLabel>username</FormLabel>
-        <Input
-          type="username"
-          placeholder="E.g Harry Udechukwu"
-          {...register('username', { required: true })}
-        />
+        {formStep < MAX_STEPS && (
+          <div>
+            <p>
+              Step {formStep + 1} of {MAX_STEPS}
+            </p>
+          </div>
+        )}
 
-        <Select
-          placeholder="Select option"
-          {...register('userCategory', { required: true })}
-        >
-          <option value="Active Member">Active Member</option>
-          <option value="Community Manager">Community Manager</option>
-        </Select>
+        {formStep >= 0 && (
+          <section className={formStep === 0 ? 'block' : 'hidden'}>
+            {/* <Controller
+              name="userCategory"
+              {...register('userCategory', {
+                required: { value: true, message: 'please type a username' },
+              })}
+              control={control}
+              render={({ field }) => (
+                <Select {...field} defaultValue={''} options={options} />
+              )}
+            /> */}
+            <Select
+              placeholder="Select option"
+              {...register('userCategory', {
+                required: 'chose user Category',
+              })}
+            >
+              <option value="Active Member">Active Member</option>
+              <option value="Community Manager">Community Manager</option>
+            </Select>
 
-        {/* <Input
-          placeholder="category"
-          {...register('userCategory', { required: true })}
-        /> */}
+            {errors.userCategory && <p>{errors.userCategory.message}</p>}
+          </section>
+        )}
 
-        <FormLabel>Which industry are you working in</FormLabel>
-        <Input
-          placeholder="E.g Product Designer"
-          {...register('interest', { required: true })}
-        />
+        {formStep >= 1 && (
+          <section className={formStep === 1 ? 'block' : 'hidden'}>
+            <FormLabel>username</FormLabel>
 
-        <FormLabel>Bio</FormLabel>
-        <Input
-          placeholder="E.g I am a Product Designer, i am currently based in Nigeria"
-          {...register('bio', { required: true })}
-        />
+            <Input
+              type="text"
+              placeholder="E.g Harry Udechukwu"
+              {...register('username', {
+                required: { value: true, message: 'please type a username' },
+              })}
+            />
+            {errors.username && <p>{errors.username.message}</p>}
 
-        <Button type="submit">Submit</Button>
+            <FormLabel>Which industry are you working in</FormLabel>
+            <Input
+              placeholder="E.g Product Designer"
+              {...register('interest', {
+                required: { value: true, message: 'please type your interest' },
+              })}
+            />
+            {errors.interest && <p>{errors.interest.message}</p>}
+
+            <FormLabel>Bio</FormLabel>
+            <Input
+              placeholder="E.g I am a Product Designer, i am currently based in Nigeria"
+              {...register('bio', {
+                required: { value: true, message: 'please input your bio' },
+              })}
+            />
+            {errors.bio && <p>{errors.bio.message}</p>}
+          </section>
+        )}
+
+        {renderButton()}
       </chakra.form>
     </>
   )
