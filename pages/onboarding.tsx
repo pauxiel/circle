@@ -1,9 +1,13 @@
-import { chakra, Input, FormLabel, Button, Box, Select } from '@chakra-ui/react'
+import { chakra, Button, Textarea } from '@chakra-ui/react'
 import { useState } from 'react'
 // import Select from 'react-select'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
+import AciveCheck from '../asset/activemember.svg'
+import CommunityCheck from '../asset/communitymanager.svg'
+import OnboardingIcon from '../asset/onboarding.svg'
+import Image from 'next/image'
 
 const MAX_STEPS = 2
 
@@ -28,13 +32,13 @@ function Onboarding() {
       return undefined
     } else if (formStep === 1) {
       return (
-        <Button disabled={!isValid} type="submit">
-          Submit
+        <Button  colorScheme='messenger'  width='100%' disabled={!isValid} type="submit">
+          Get Started
         </Button>
       )
     } else {
       return (
-        <Button disabled={!isValid} type="button" onClick={completeFormStep}>
+        <Button colorScheme='messenger'  width='100%' disabled={!isValid} type="button" onClick={completeFormStep}>
           Next Step
         </Button>
       )
@@ -61,6 +65,7 @@ function Onboarding() {
         'Content-Type': 'application/json',
       },
     }
+
     const res = await axios(config)
     if (res.status === 200) {
       const u = await axios(updateUser)
@@ -69,6 +74,7 @@ function Onboarding() {
       //   console.log('loaded')
       // }
       if (u.status === 200) router.push('/', '/')
+      console.log(res.data)
     } else {
       console.log('not loaded')
     }
@@ -80,7 +86,8 @@ function Onboarding() {
   ]
   return (
     <>
-      <chakra.form onSubmit={handleSubmit(onSubmitForm)}>
+
+{/* <chakra.form onSubmit={handleSubmit(onSubmitForm)}>
         {formStep < MAX_STEPS && (
           <div>
             <p>
@@ -91,16 +98,7 @@ function Onboarding() {
 
         {formStep >= 0 && (
           <section className={formStep === 0 ? 'block' : 'hidden'}>
-            {/* <Controller
-              name="userCategory"
-              {...register('userCategory', {
-                required: { value: true, message: 'please type a username' },
-              })}
-              control={control}
-              render={({ field }) => (
-                <Select {...field} defaultValue={''} options={options} />
-              )}
-            /> */}
+       
             <Select
               placeholder="Select option"
               {...register('userCategory', {
@@ -149,7 +147,139 @@ function Onboarding() {
         )}
 
         {renderButton()}
-      </chakra.form>
+      </chakra.form> */}
+      <form className="onboarding-steps font-Outfit w-full grid grid-col-3  space-y-6 items-center h-screen" onSubmit={handleSubmit(onSubmitForm)}>
+       
+
+        <div className="w-1/2 mx-auto">
+
+        {formStep < MAX_STEPS && (
+        <span className="text-md text-blue-600 font-bold"> 
+        Step {formStep + 1} of {MAX_STEPS}</span>
+         
+        )}
+
+
+        {formStep >= 0 && (
+            <section className={formStep === 0 ? 'block' : 'hidden'}>
+
+              {/* <Select
+              placeholder="Select option"
+              {...register('userCategory', {
+                required: 'chose user Category',
+              })}
+            >
+              <option value="Active Member">Active Member</option>
+              <option value="Community Manager">Community Manager</option>
+            </Select> */}
+
+                <div className="space-y-6 first-step">
+               <div className="text-heading">
+                 <h1 className="text-3xl font-bold">How are you planning to use Circcle</h1>
+               <p className="text-xl">it would help us set up your account proper for you</p>
+
+                </div>
+       
+             <div className="check-boxes space-y-4"  
+             {...register('userCategory', {
+                required: 'Choose User Category',
+              })}>
+               <div className="first-check flex items-center space-x-3 p-4 rounded-md border border-gray-300">
+               <Image 
+            src={AciveCheck}
+         alt='checkbox icon'
+         className="rounded-full"
+         width={25} height={25}
+       
+            />
+           <div className="flex-1">
+           <div className="flex items-center justify-between">
+           <h1 className="font-bold">Active Member</h1>
+
+             <input type="checkbox" name="" id="" value="Active Member"  {...register('userCategory', {
+                required: 'Choose User Category',
+              })}/>
+           </div>
+           <p>As an active member, you will join communities, connect with others and learn</p>
+           </div>
+        
+
+
+              </div>
+
+         <div className="second-check flex items-center space-x-3 p-4 rounded-md border border-gray-300">
+         <Image 
+         src={CommunityCheck}
+         alt='checkbox icon'
+         className="rounded-full"
+         width={25} height={25}
+       
+         />
+           <div className="flex-1">
+           <div className="flex items-center justify-between">
+           <h1 className="font-bold">Community manager</h1>
+
+             <input type="checkbox" name="" id=""  value="Community Manager"  {...register('userCategory', {
+                required: 'chose user Category',
+              })} />
+           </div>
+           <p>As a community manager,you will set up and contol communities for a safer enviroment</p>
+           </div>
+
+               </div>
+
+       </div>
+          </div>
+       
+            {errors.userCategory && <p className="text-red-500 mt-2 italic">{errors.userCategory.message}</p>}
+          </section>
+        )}
+        
+        {formStep >= 1 && (
+          <section className={formStep === 1 ? 'block' : 'hidden'}>
+           <div className="text-heading mb-4">
+                 <h1 className="text-3xl font-bold">Basic Information</h1>
+               <p className="text-xl">To complete your profile, your basic information will be needed</p>
+
+          </div>
+      <div className="w-full flex flex-col font-Outfit space-y-2">
+      <label htmlFor="Email" className="text-xl">Username:</label>
+      <input name="username"  id="" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Eg. harryudechukwu' 
+       {...register('username', {
+                required: { value: true, message: 'please type a username' },
+              })}/>
+       </div>
+      {errors.username && <p className="text-red-500 my-2 italic">{errors.username.message}</p>}
+
+      <div className="w-full flex flex-col font-Outfit space-y-2">
+        <label htmlFor="Email" className="text-xl">Which industry are you working on?</label>
+        <input  name=""  id="" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Web Developer' 
+      {...register('interest', {
+        required: { value: true, message: 'please input your interest' },
+      })}/>
+       </div>
+            {errors.interest && <p className="text-red-500 my-2 italic">{errors.interest.message}</p>}
+
+        <div className="w-full flex flex-col font-Outfit space-y-2">
+        <label htmlFor="Email" className="text-xl">Bio:</label>
+        <textarea rows="4" cols="50" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Eg. I’m a Web developer, currently based in Nigeria'  
+        {...register('bio', {
+                required: { value: true, message: 'please input your bio' },
+              })}></textarea>
+       </div>
+
+            {errors.bio && <p className="text-red-500 my-2 italic">{errors.bio.message}</p>}
+          </section>
+        )}
+
+        <div className="mt-4">
+        {renderButton()}
+        </div>
+        
+        </div>
+     
+      </form>
+     
     </>
   )
 }

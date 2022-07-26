@@ -19,6 +19,12 @@ import {
 import { BsGithub } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react'
+import Logo from '../asset/logo.svg'
+import SignBg from '../asset/signupbg.svg'
+import Flower from '../asset/flower.svg'
+import Pattern from '../asset/pattern.svg'
+
+
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -63,89 +69,61 @@ function Login() {
     signIn('email', { email, redirect: false })
   }
   return (
-    <SimpleGrid
-      columns={{
-        base: 1,
-        md: 2,
-      }}
-      spacing={0}
-      _after={{
-        bg: 'brand.500',
-        opacity: 0.25,
-        pos: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        zIndex: -1,
-        content: '" "',
-      }}
-    >
-      <Flex
-        direction="column"
-        alignItems="start"
-        justifyContent="center"
-        px={{
-          base: 4,
-          lg: 20,
-        }}
-        py={24}
-      >
-        <Badge
-          color="white"
-          px={3}
-          py={1}
-          mb={3}
-          variant="solid"
-          colorScheme="brand"
-          rounded="full"
-        >
-          Pre Beta
-        </Badge>
-        <chakra.h1
-          mb={6}
-          fontSize={{
-            base: '4xl',
-            md: '4xl',
-            lg: '3xl',
-          }}
-          fontWeight="bold"
-          color="brand.600"
-          _dark={{
-            color: 'gray.300',
-          }}
-          lineHeight="shorter"
-        >
-          Communities where you can grow and connect within your circle
-        </chakra.h1>
-        <chakra.form onSubmit={handleSubmit} w="full" mb={6}>
-          <FormLabel>Email Address</FormLabel>
-          <Input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your Email"
+   
+    <>
+   <section className="grid grid-cols-2 z-10">
+    <div className="left-side h-screen">
+    <header className="py-4 px-6">
+        <div className="logo w-full">
+          <Image 
+          src={Logo.src}
+          alt='the circle app Logo'
+          className="w-24"
+          
           />
-          <chakra.p
-            pr={{
-              base: 0,
-              lg: 16,
-            }}
-            mb={4}
-            fontSize="sm"
-            color="brand.600"
-            _dark={{
-              color: 'gray.400',
-            }}
-            letterSpacing="wider"
-          >
-            By creating an account you agree to our terms of service and privacy
-            policy
-          </chakra.p>
-          <Button colorScheme="blue" type="submit" w="100%">
+        </div>
+      </header>
+
+      <div className="flex py-20 px-8 ">
+        <div className="flex items-start relative">
+        <Image 
+          src={Flower.src}
+          alt='the circle app Logo'
+          className="absolute -top-4 -left-2"
+          
+          />
+          <div className="heading font-Outfit px-6">
+          <h1 className="text-2xl font-bold">Communities where you can grow and connect within your circle</h1>
+         <p className="text-xl">Join the talent-driven communites and members and find opportunites </p>
+          </div>
+        </div>
+     
+        
+
+        <Image 
+          src={Pattern.src}
+          alt='the circle app Logo'
+          className=""
+          
+          />
+      </div>
+
+      <form className=" px-16 w-full space-y-8 pb-2" onSubmit={handleSubmit}>
+      <div className="email w-full flex flex-col font-Outfit space-y-2">
+      <label htmlFor="Email" className="text-xl">Email</label>
+      <input type="email" name=""  id="" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Enter your email'
+       onChange={(e) => setEmail(e.target.value)}/>
+
+      <span>By creating an account you agree to our terms of service and privacy policy </span>
+      </div>
+
+      <button className="bg-blue-600 rounded-md w-full py-3 px-2 text-white" type="submit">
             Get Started
-          </Button>
-        </chakra.form>
-        <VStack w="full">
+      </button>
+      
+      </form>
+
+         <VStack className="px-16 w-full ">
           {providers.map(({ name, Icon }) => (
             <Button
               key={name}
@@ -157,22 +135,24 @@ function Login() {
             </Button>
           ))}
         </VStack>
-      </Flex>
-      <Box>
-        <Image
-          src="https://images.unsplash.com/photo-1531548731165-c6ae86ff6491?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
-          alt="3 women looking at a laptop"
-          fit="cover"
-          w="full"
-          h={{
-            base: 64,
-            md: 'full',
-          }}
-          bg="gray.100"
-          loading="lazy"
-        />
-      </Box>
-    </SimpleGrid>
+
+    </div>
+
+    <div className="right-side h-screen bg-gray-100 flex justify-end">
+
+         <Image 
+          src={SignBg.src}
+          alt='the whatnew icon'
+        
+          
+         
+    />
+   
+    </div>
+   </section>
+
+    </>
+    
   )
 }
 
