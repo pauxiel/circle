@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:dev": "pscale connect circle initial-setup --port 3309",
+    "db:dev": "pscale connect circle intial-setup --port 3309",
     "db:push": "npx prisma db push"
   },
   "prettier": {
