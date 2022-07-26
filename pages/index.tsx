@@ -250,11 +250,14 @@ const Home: NextPage = () => {
                 <span>Profile</span>
               </div>
 
-              <div className="log-out flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
+              <button
+                onClick={() => signOut()}
+                className=" w-full log-out flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md"
+              >
                 <Image src={Logout} alt="the whatnew icon" className="w-full" />
-                {/* <span>Log out</span> */}
-                <button onClick={() => signOut()}>Log Out</button>
-              </div>
+
+                <span>Log out</span>
+              </button>
             </div>
           </nav>
 
