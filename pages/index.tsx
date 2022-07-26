@@ -67,6 +67,7 @@ export async function getServerSideProps(context) {
   }
 }
 
+
 const emojis = [
   {
     name: 'rage',
@@ -306,7 +307,7 @@ const Home: NextPage = () => {
         <span>Profile</span>
         </div>
 
-        <div className="log-out flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
+        <button onClick={() => signOut()} className=" w-full log-out flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
         <Image 
           src={Logout}
           alt='the whatnew icon'
@@ -315,7 +316,7 @@ const Home: NextPage = () => {
 
           <span>Log out</span>
 
-        </div>
+        </button> 
 
       </div>
 
