@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
 import AciveCheck from '../asset/activemember.svg'
 import CommunityCheck from '../asset/communitymanager.svg'
+import OnboardingIcon from '../asset/onboarding.svg'
 import Image from 'next/image'
 
 const MAX_STEPS = 2
@@ -32,7 +33,7 @@ function Onboarding() {
     } else if (formStep === 1) {
       return (
         <Button  colorScheme='messenger'  width='100%' disabled={!isValid} type="submit">
-          Submit
+          Get Started
         </Button>
       )
     } else {
@@ -73,6 +74,7 @@ function Onboarding() {
       //   console.log('loaded')
       // }
       if (u.status === 200) router.push('/', '/')
+      console.log(res.data)
     } else {
       console.log('not loaded')
     }
@@ -152,7 +154,7 @@ function Onboarding() {
         <div className="w-1/2 mx-auto">
 
         {formStep < MAX_STEPS && (
-        <span className="text-sm text-blue-600"> 
+        <span className="text-md text-blue-600 font-bold"> 
         Step {formStep + 1} of {MAX_STEPS}</span>
          
         )}
@@ -242,7 +244,7 @@ function Onboarding() {
           </div>
       <div className="w-full flex flex-col font-Outfit space-y-2">
       <label htmlFor="Email" className="text-xl">Username:</label>
-      <input name=""  id="" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Eg. harryudechukwu' 
+      <input name="username"  id="" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Eg. harryudechukwu' 
        {...register('username', {
                 required: { value: true, message: 'please type a username' },
               })}/>
