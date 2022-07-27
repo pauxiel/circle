@@ -1,20 +1,12 @@
 // import { NextPage } from 'next'
 import { useSession, signOut, getSession } from 'next-auth/react'
 import { NextPage } from 'next'
-import axios, { AxiosRequestConfig } from 'axios'
+
 import prisma from '../lib/prisma'
 import useRequireAuth from '../lib/useRequireAuth'
-import EmojiReact from 'react-emoji-react'
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import Logo from '../asset/logo.svg'
-import Search from '../asset/search.svg'
-import Feed from '../asset/feed.svg'
-import Community from '../asset/communities.svg'
-import Message from '../asset/message.svg'
-import Notification from '../asset/notifications.svg'
-import Whatnew from '../asset/whatnew.svg'
-import Soon from '../asset/soon.svg'
+import EmojiReact from 'react-emoji-react';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 import Profile from '../asset/jay.png'
 import Setting from '../asset/setting.svg'
 import Spotify from '../asset/spotify.svg'
@@ -58,67 +50,68 @@ export async function getServerSideProps(context) {
     },
   }
 }
-
 const emojis = [
   {
     name: 'rage',
-    count: 2,
+    count: 2
   },
   {
     name: 'blush',
-    count: 1,
+    count: 1
   },
   {
     name: 100,
-    count: 3,
+    count: 3
   },
   {
     name: 'grinning',
-    count: 2,
-  },
-]
+    count: 2
+  }
+];
 
 class ReactingComponent extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      emojis,
-    }
+      emojis
+    };
   }
 
   onReaction(name) {
-    const emojis = this.state.emojis.map((emoji) => {
+    const emojis = this.state.emojis.map(emoji => {
       if (emoji.name === name) {
-        emoji.count += 1
+        emoji.count += 1;
       }
-      return emoji
-    })
-    this.setState({ emojis })
+      return emoji;
+    });
+    this.setState({ emojis });
   }
 
   onEmojiClick(name) {
-    console.log(name)
-    const emojis = this.state.emojis.concat([{ name, count: 1 }])
-    this.setState({ emojis })
+    console.log(name);
+    const emojis = this.state.emojis.concat([{name, count: 1}]);
+    this.setState({ emojis });
   }
 
   render() {
     return (
-      <EmojiReact
-        reactions={this.state.emojis}
-        onReaction={(name) => this.onReaction(name)}
+      <EmojiReact 
+        reactions={this.state.emojis} 
+        onReaction={(name) => this.onReaction(name)} 
         onEmojiClick={(name) => this.onEmojiClick(name)}
       />
-    )
+    );
   }
 }
+
+
 
 const Home: NextPage = () => {
   const { data: session } = useSession()
 
   return (
     <>
-      {/*     
+{/*     
       <h1>{`Welcome ${session?.user?.name}`}</h1>
       <p>{`Welcome ${session?.user?.email}`}</p>
       <button onClick={() => signOut()}>sign out</button> */}
