@@ -123,8 +123,7 @@ const Home: NextPage = () => {
       <p>{`Welcome ${session?.user?.email}`}</p>
       <button onClick={() => signOut()}>sign out</button> */}
  
-        {/* Main styling */}
- 
+        {/* Index Page styling Start*/}
       <div className="feed-section-loop  border-b">
       <div className="feed space-y-4 px-8 py-6 ">
 
@@ -341,6 +340,7 @@ const Home: NextPage = () => {
       </div>
       </div>
      
+        {/* Index Page styling Start*/}
     </>
   )
 }

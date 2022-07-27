@@ -71,6 +71,7 @@ function Login() {
   return (
    
     <>
+    {/* Login Page Styling Start */}
    <section className="grid grid-cols-2 z-10">
     <div className="left-side h-screen">
     <header className="py-4 px-6">
@@ -150,6 +151,8 @@ function Login() {
    
     </div>
    </section>
+
+    {/* Login Page Styling End */}
 
     </>
     
