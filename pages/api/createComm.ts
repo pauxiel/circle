@@ -3,7 +3,7 @@ import prisma from '../../lib/prisma'
 import { getSession } from 'next-auth/react'
 
 export default async function (req, res) {
-  const { name, industryType, about } = req.body
+  const { commName, commType, commAbout } = req.body
 
   const session = await getSession({ req })
 
@@ -13,11 +13,11 @@ export default async function (req, res) {
 
   const community = await prisma.community.create({
     data: {
-      name,
-      industryType,
+      commName,
+      commType,
       // email: session.user.email,
-      about,
-      // user: { connect: { email: session.user.email } },
+      commAbout,
+      managers : { connect: { email: session.user.email } },
     },
   })
 

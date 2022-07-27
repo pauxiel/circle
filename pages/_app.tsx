@@ -5,8 +5,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 
-import theme from '../src/theme'
-import Layout from '../src/components/layout/index'
+import theme from '../theme'
+import Layout from '../components/layout/index'
 
 const useMediaQuery = (width: number) => {
   const [targetReached, setTargetReached] = useState<boolean>(false)
