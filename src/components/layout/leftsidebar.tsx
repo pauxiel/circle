@@ -119,6 +119,8 @@ function LeftSidebar() {
       </div>
 
     </nav>
+
+       {/* left-sidebar styling End*/}
         
         </>
     )

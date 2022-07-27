@@ -6,7 +6,7 @@ function Aside() {
     return(
         <>
 
-    {/* right-sidebar styling */}
+    {/* right-sidebar styling Start*/}
     <aside className="w-1/4 px-8 py-12 font-Outfit flex flex-col justify-center space-y-4 ">
       <div className="pinned">
       <Image 
@@ -35,6 +35,9 @@ You can pin important posts to your screen for easy access</p>
          </div>
 
     </aside>
+
+
+    {/* right-sidebar styling End*/}
         </>
     )
 }

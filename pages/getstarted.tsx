@@ -6,6 +6,8 @@ function GetStarted() {
 
     return(
        <>
+
+    {/* GetStarted styling Start*/}
             <div className="flex flex-col space-y-8 ">
             <Image 
           src={OnboardingIcon}
@@ -24,7 +26,7 @@ function GetStarted() {
           </div>
             </div>
         
-
+ {/* GetStarted styling End*/}
        </>
     )
 }

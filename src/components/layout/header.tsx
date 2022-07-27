@@ -7,6 +7,7 @@ function Header() {
 
     return(
         <>
+           {/* Header styling Start*/}
          <header className="border border-gray-200 py-4 px-6 flex items-center justify-between">
          <div className="logo w-full">
           <Image 
@@ -28,7 +29,7 @@ function Header() {
         </div>
       </header>
 
-        
+           {/* Header styling End*/}
         </>
     )
 }
