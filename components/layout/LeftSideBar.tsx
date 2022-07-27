@@ -1,4 +1,6 @@
 import { useSession, signOut, getSession } from 'next-auth/react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Feed from '../../asset/feed.svg'
 import Community from '../../asset/communities.svg'
 import Message from '../../asset/message.svg'
@@ -10,6 +12,7 @@ import Profile from '../../asset/jay.png'
 import Image from 'next/image'
 
 function LeftSidebar() {
+  const router = useRouter()
   return (
     <>
       {/* left-sidebar styling */}
@@ -18,7 +21,13 @@ function LeftSidebar() {
         <div className="nav-items space-y-3">
           <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
             <Image src={Feed} alt="the feed icon" className="w-full" />
-            <span>My Feed</span>
+
+            {/* <span>
+              <a onClick={() => router.push('/emptyfeed')}>My Feed</a>
+            </span> */}
+            <Link href="/emptyfeed">
+              <span>My Feed</span>
+            </Link>
           </div>
 
           <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
@@ -27,7 +36,9 @@ function LeftSidebar() {
               alt="the community icon"
               className="w-full"
             />
-            <span>Communities</span>
+            <Link href="/">
+              <span>Communities</span>
+            </Link>
           </div>
 
           <div className="nav-item flex items-center space-x-3  hover:bg-gray-200 px-2 py-3 rounded-md">
