@@ -1,4 +1,4 @@
-import { chakra, Button, Textarea } from '@chakra-ui/react'
+import { chakra, Button, Select,FormLabel,Input, Textarea } from '@chakra-ui/react'
 import { useState } from 'react'
 // import Select from 'react-select'
 import axios, { AxiosRequestConfig } from 'axios'
@@ -87,7 +87,7 @@ function Onboarding() {
   return (
     <>
 
-{/* <chakra.form onSubmit={handleSubmit(onSubmitForm)}>
+ {/* <chakra.form onSubmit={handleSubmit(onSubmitForm)}>
         {formStep < MAX_STEPS && (
           <div>
             <p>
@@ -147,7 +147,8 @@ function Onboarding() {
         )}
 
         {renderButton()}
-      </chakra.form> */}
+      </chakra.form>  */}
+
       <form className="onboarding-steps font-Outfit w-full grid grid-col-3  space-y-6 items-center h-screen" onSubmit={handleSubmit(onSubmitForm)}>
        
 
@@ -163,16 +164,7 @@ function Onboarding() {
         {formStep >= 0 && (
             <section className={formStep === 0 ? 'block' : 'hidden'}>
 
-              {/* <Select
-              placeholder="Select option"
-              {...register('userCategory', {
-                required: 'chose user Category',
-              })}
-            >
-              <option value="Active Member">Active Member</option>
-              <option value="Community Manager">Community Manager</option>
-            </Select> */}
-
+         
                 <div className="space-y-6 first-step">
                <div className="text-heading">
                  <h1 className="text-3xl font-bold">How are you planning to use Circcle</h1>
