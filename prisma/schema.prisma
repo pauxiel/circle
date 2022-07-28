@@ -49,6 +49,10 @@ model User {
   profile        Profile?      
   onboarded      Boolean       @default(false)
   // userCategory UserCategory[] @relation(references: [id])
+  member       CommunityMember[]
+  manager      CommunityAdmin[]
+
+  
  
 }
 
@@ -60,6 +64,40 @@ model Profile {
   userCategory String?
   userId      String @unique
   user         User @relation(fields: [userId], references: [id]) 
+}
+
+
+
+model CommunityAdmin {
+  id  String    @id @default(cuid())
+  user User @relation(fields: [managerId], references: [id]) 
+  community Community @relation(fields: [communityId], references: [id])
+  managerId String @unique
+  communityId  String @unique 
+  
+
+}
+
+model CommunityMember {
+   id  String    @id @default(cuid())
+   user User @relation(fields: [userId], references: [id])
+   community Community @relation(fields: [communityId], references: [id])
+   communityId  String @unique 
+   userId      String @unique
+
+
+}
+
+
+model Community {
+  id  String    @id @default(cuid())
+  commName String?
+  commType String?
+  commAbout String?
+  managers   CommunityAdmin[]
+  members  CommunityMember[]
+  // manager   User @relation(fields: [managerId], references: [id]) 
+  // managerId      String @unique
 }
 
 

@@ -13,7 +13,7 @@ export default async function (req, res) {
 
   const profile = await prisma.profile.create({
     data: {
-      userCategory,
+      userCategory: userCategory.toString(),
       username,
       // email: session.user.email,
       interest,
