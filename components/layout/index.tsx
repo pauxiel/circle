@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import prisma from '../../lib/prisma'
 // import useRequireAuth from './lib/useRequireAuth'
 import { VStack, Container } from '@chakra-ui/react'
-import Header from './Header'
+import Header from './header'
 import LeftSidebar from './LeftSideBar'
 import Aside from './Aside'
 
