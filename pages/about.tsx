@@ -123,7 +123,7 @@ function About() {
 
     <div className="user-details px-6 mb-4 ">
       <h1 className="font-bold text-2xl">About</h1>
-      <span className="text-sm text-gray-400">{data.bio}</span>
+      <p className="text-sm text-gray-400 leading-4">{data.bio}</p>
     </div>
 
 
