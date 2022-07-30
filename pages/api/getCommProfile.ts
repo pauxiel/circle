@@ -11,15 +11,15 @@ export default async function (req, res) {
     return res.status(401)
   }
 
-  const getUserProfile = await prisma.profile.findUnique({
+  const getCommProfile = await prisma.community.findUnique({
     where: {
-      userId: session.user.id,
+      adminId: session.user.id,
     },
 
     select: {
-      bio: true,
-      username: true,
-      interest: true,
+      commName: true,
+      commType: true,
+      commAbout: true,
     },
 
     // include: {
@@ -27,7 +27,7 @@ export default async function (req, res) {
     // },
   })
 
-  console.log(getUserProfile)
+  console.log(getCommProfile)
   // console.log(session.user.email)
-  return res.status(200).json(getUserProfile)
+  return res.status(200).json(getCommProfile)
 }

@@ -18,7 +18,7 @@ export default function CreateCommModal(props) {
       <div className="fixed h-screen w-screen bg-black z-10 top-0 opacity-50"></div>
       <div className="fixed top-0 right-0 left-0 z-20 flex justify-center">
         <div className="mt-24 mx-4 my-4 bg-white w-[500px] h-[500px] overflow-hidden relative">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 absolute z-40 right-3 top-3 cursor-pointer"
             fill="none"
@@ -31,7 +31,9 @@ export default function CreateCommModal(props) {
               strokeLinejoin="round"
               d="M6 18L18 6M6 6l12 12"
             />
-          </svg>
+          </svg> */}
+
+          {navIndex <= 1 && <div className="mb-2">{navIndex + 1}/2</div>}
 
           {/* modal content will be here  */}
           <Transition
@@ -57,7 +59,7 @@ export default function CreateCommModal(props) {
             <CreateCommTwo />
           </Transition>
           {/* {navIndex === 1 && <CreateCommTwo />} */}
-          <Transition
+          {/* <Transition
             show={navIndex === 2}
             enter="transition ease-in-out duration-700 transform"
             enterFrom="-translate-x-full"
@@ -67,9 +69,9 @@ export default function CreateCommModal(props) {
             leaveTo="translate-x-full"
           >
             <div>hi</div>
-            {/* <CreateCommThree /> */}
-            {/* {renderComponent()} */}
-          </Transition>
+            <CreateCommThree /> 
+             {renderComponent()}
+          </Transition> */}
 
           {/* modal content ends here  */}
           {/* 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export default function useToggle() {
-  const [on, setOn] = useState(true)
+  const [on, setOn] = useState(false)
 
   const toggler = () => {
     setOn((on) => !on)
