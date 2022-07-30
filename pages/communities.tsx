@@ -1,10 +1,13 @@
-// import CreateCommModal from '../components/CreateCommModal'
+import CreateCommModal from '../components/CreateCommModal'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useRouter } from 'next/router'
+import useToggle from '../hooks/useToggle'
+import CreateProvider from '../context/contextCreate'
 
 function communities() {
+  const { on, toggler } = useToggle()
   const {
     control,
     register,
@@ -81,7 +84,10 @@ function communities() {
         <button type="submit">Submit</button>
       </form>
 
-      {/* <CreateCommModal /> */}
+      {/* <button type = 'button' toggler={toggler} >Submit</button> */}
+      <CreateProvider>
+        {on && <CreateCommModal toggler={toggler} />}
+      </CreateProvider>
     </>
   )
 }

@@ -9,11 +9,9 @@ export default function CreateCommThree() {
         {/* <Image src={img} alt="bg" className="w-1/2" /> */}
       </div>
       <h4 className="flex justify-center text-red-600 font-semibold italic text-xl pt-3">
-        Get your back
+        Community Created
       </h4>
-      <span className="flex justify-center">
-        Set up different measures to start with your life
-      </span>
+      <button>Start Managing</button>
     </div>
   )
 }

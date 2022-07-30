@@ -21,6 +21,8 @@ export default async function (req, res) {
           id: session.user.id,
           admin: {
             connect: { email: session.user.email },
+            // create: { id: session.user.id },
+            
           },
         },
       },

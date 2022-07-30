@@ -9,10 +9,10 @@ export default function CreateCommOne() {
         {/* <Image src={img} alt="bg" className="w-1/2" /> */}
       </div>
       <h4 className="flex justify-center text-red-600 font-semibold italic text-xl pt-3">
-        Welcome to our app!
+        Creating New Communities
       </h4>
       <span className="flex justify-center">
-        Get on the right track towards mindfullness
+        By creating communities, you agreed to these
       </span>
     </div>
   )
