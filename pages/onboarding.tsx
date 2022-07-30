@@ -253,7 +253,7 @@ function Onboarding() {
             {errors.interest && <p className="text-red-500 my-2 italic">{errors.interest.message}</p>}
 
         <div className="w-full flex flex-col font-Outfit space-y-2">
-        <label htmlFor="Email" className="text-xl">Bio:</label>
+        <label htmlFor="bio" className="text-xl">Bio:</label>
         <textarea rows="4" cols="50" className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50" placeholder='Eg. I’m a Web developer, currently based in Nigeria'  
         {...register('bio', {
                 required: { value: true, message: 'please input your bio' },

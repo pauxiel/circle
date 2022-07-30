@@ -333,7 +333,7 @@ const Home: NextPage = () => {
       </div>
       </div>
      
-        {/* Index Page styling Start*/}
+        {/* Index Page styling End*/}
     </>
   )
 }
