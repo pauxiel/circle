@@ -71,7 +71,11 @@ function About() {
           <div className="flex items-center shadow-md w-28 p-1 rounded-full  -mt-14 bg-white">
             <div className="profile-avatar w-28 rounded-full flex items-center z-10 bg-yellow-500">
               <Image
-                src={Malemoji}
+                src={
+                  session?.user?.image === null
+                    ? Malemoji
+                    : session?.user?.image
+                }
                 alt="the profile image preview"
                 className=""
                 width={130}

@@ -9,10 +9,13 @@ import Whatnew from '../../asset/whatnew.svg'
 import Logout from '../../asset/logout.svg'
 import Soon from '../../asset/soon.svg'
 import Profile from '../../asset/jay.png'
+import Malemoji from '../../asset/malemoji.svg'
 import Image from 'next/image'
 
 function LeftSidebar() {
   const router = useRouter()
+  const { data: session } = useSession()
+
   return (
     <>
       {/* left-sidebar styling */}
@@ -31,16 +34,15 @@ function LeftSidebar() {
             </div>
           </Link>
           <Link href="/communities">
-          <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
-            <Image
-              src={Community}
-              alt="the community icon"
-              className="w-full"
-            />
-           
+            <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
+              <Image
+                src={Community}
+                alt="the community icon"
+                className="w-full"
+              />
+
               <span>Communities</span>
-            
-          </div>
+            </div>
           </Link>
 
           <div className="nav-item flex items-center space-x-3  hover:bg-gray-200 px-2 py-3 rounded-md">
@@ -76,7 +78,11 @@ function LeftSidebar() {
           <Link href="/about">
             <div className="profile flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
               <Image
-                src={Profile}
+                src={
+                  session?.user?.image === null
+                    ? Malemoji
+                    : session?.user?.image
+                }
                 alt="the profile image preview"
                 className="rounded-full"
                 width={30}
