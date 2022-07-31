@@ -49,17 +49,18 @@ export default function CreateCommTwo() {
     switch (state) {
       case 'choosing':
         return (
-          <div className="">
-            <div className="bg-slate-300 flex justify-center">
-              {/* <Image src={img} alt="bg" className="w-1/2" /> */}
+          <div className="px-4 ">
+            <div className="mb-4 mt-2">
+          <h1 className="font-bold text-2xl">  Creating New Communities</h1>
+          <span className="text-sm text-gray-400"> By creating communities, you agreed to these</span>
             </div>
-            <h4 className="flex justify-center text-red-600 font-semibold italic text-xl pt-3">
-              Create Community
-            </h4>
-            <form onSubmit={handleSubmit(onSubmitForm)}>
-              <label>Community Name</label>
+            <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-3">
+
+            <div className="flex flex-col space-y-3">
+            <label>Community Name</label>
               <input
-                placeholder="E.g E.g design Community"
+              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
+                placeholder="E.g design Community"
                 {...register('commName', {
                   required: {
                     value: true,
@@ -68,9 +69,13 @@ export default function CreateCommTwo() {
                 })}
               />
 
+            </div>
+             
+            <div className="flex flex-col space-y-3">
               <label>Industry Type</label>
               <input
-                placeholder="Select your Industry"
+              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
+                placeholder="Type your Industry"
                 {...register('commType', {
                   required: {
                     value: true,
@@ -78,9 +83,14 @@ export default function CreateCommTwo() {
                   },
                 })}
               />
+              </div>
 
+
+              <div className="flex flex-col space-y-3">
               <label>About Community</label>
-              <input
+              <textarea
+              rows="5"
+              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none"
                 placeholder="E.g Design Community bringsd together product designers.."
                 {...register('commAbout', {
                   required: {
@@ -88,14 +98,17 @@ export default function CreateCommTwo() {
                     message: 'please select your community industry',
                   },
                 })}
-              />
+              ></textarea>
+              </div>
 
-              <button type="submit">Submit</button>
+              <button className="border py-2 px-4 rounded-md bg-blue-600 hover:bg-blue-700 text-white" type="submit">Create Community</button>
             </form>
           </div>
         )
       case 'uploading':
-        return <div>loading</div>
+        return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+        <h1 className="text-3xl font-bold italic">Loading Please Wait...</h1>
+        </div>
       case 'success':
         return <CreateCommThree />
     }
