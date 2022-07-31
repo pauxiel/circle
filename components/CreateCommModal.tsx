@@ -17,7 +17,7 @@ export default function CreateCommModal(props) {
     <div className="static">
       <div className="fixed h-screen w-screen bg-black z-10 top-0 opacity-50"></div>
       <div className="fixed top-0 right-0 left-0 z-20 flex justify-center">
-        <div className="mt-24 mx-4 my-4 bg-white w-[500px] h-[500px] overflow-hidden relative">
+        <div className="mt-24 mx-4 rounded-lg my-4 bg-white w-[500px] h-[550px] overflow-hidden relative">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 absolute z-40 right-3 top-3 cursor-pointer"
@@ -33,7 +33,7 @@ export default function CreateCommModal(props) {
             />
           </svg> */}
 
-          {navIndex <= 1 && <div className="mb-2">{navIndex + 1}/2</div>}
+          {navIndex <= 1 && <div className="px-4 pt-6 text-blue-600">{navIndex + 1}/2</div>}
 
           {/* modal content will be here  */}
           <Transition
@@ -90,16 +90,16 @@ export default function CreateCommModal(props) {
           )} */}
 
           {navIndex === 0 && (
-            <>
+            <div className="px-6 space-x-4 flex items-center justify-left w-full">
               <button
                 onClick={() => navHandler('next')}
-                className="py-2 px-20 rounded-xl bg-slate-600 text-white"
+                className="py-2 px-6 rounded-md bg-blue-500 text-white"
               >
                 Continue
               </button>
 
-              <button onClick={() => props.toggler()}>Cancel</button>
-            </>
+              <button className="border py-2 px-6 rounded-md" onClick={() => props.toggler()}>Cancel</button>
+            </div>
           )}
 
           {/* {navIndex === 1 && (

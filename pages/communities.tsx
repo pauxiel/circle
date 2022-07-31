@@ -49,8 +49,13 @@ function communities() {
     setCommunitiesNum((prevCommNum) => prevCommNum + 10)
   }
 
-  if (error) return <div>Failed to load</div>
-  if (!communities) return <div>Loading...</div>
+  if (error) return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+  <h1 className="text-3xl font-bold italic">Failed to Load...</h1>
+  </div>
+
+  if (!communities) return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+  <h1 className="text-3xl font-bold italic">Loading...</h1>
+  </div>
 
   return (
     <>
@@ -67,7 +72,7 @@ function communities() {
             <h1>{community.commName}</h1>
             <p>{community.commType}</p>
             <p>{community.commAbout}</p>
-            <form action="" onSubmit = {handleSubmit(onSubmitForm)}>>
+            <form action="" onSubmit = {handleSubmit(onSubmitForm)}>
             {/* <input
               type="hidden"
               defaultValue={community.id}
