@@ -30,17 +30,18 @@ function LeftSidebar() {
               <a>My Feed</a>
             </div>
           </Link>
-
+          <Link href="/communities">
           <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
             <Image
               src={Community}
               alt="the community icon"
               className="w-full"
             />
-            <Link href="/">
+           
               <span>Communities</span>
-            </Link>
+            
           </div>
+          </Link>
 
           <div className="nav-item flex items-center space-x-3  hover:bg-gray-200 px-2 py-3 rounded-md">
             <div className="flex items-center space-x-3">

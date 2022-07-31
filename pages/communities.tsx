@@ -10,7 +10,35 @@ import CreateProvider from '../context/contextCreate'
 import FadeIn from 'react-fade-in'
 
 function communities() {
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm()
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+
+  const onSubmitForm = async (values) => {
+    const addUser: AxiosRequestConfig = {
+      url: '/api/addMember',
+      data: values,
+      method: 'patch',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const res = await axios(addUser);
+    if (res.status === 200) {
+      console.log('yes')
+    }
+
+
+
+
+
+  }
   const { on, toggler } = useToggle()
 
   const { data: communities, error } = useSWR('/api/fetchAllCom', fetcher)
@@ -39,7 +67,22 @@ function communities() {
             <h1>{community.commName}</h1>
             <p>{community.commType}</p>
             <p>{community.commAbout}</p>
-            <button>Join community</button>
+            <form action="" onSubmit = {handleSubmit(onSubmitForm)}>>
+            {/* <input
+              type="hidden"
+              defaultValue={community.id}
+              {...register('commId')}
+            /> */}
+
+               <input
+              type="hidden"
+              defaultValue={community.adminId}
+              {...register('commAdmin')}
+            />
+
+            <button type = 'submit'>Join community</button>
+            </form>
+            
           </div>
         ))}
       </FadeIn>
