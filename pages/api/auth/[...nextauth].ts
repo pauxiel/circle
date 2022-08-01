@@ -63,7 +63,7 @@ export const authOptions = {
         id: user.id,
         // id: token.uid,
         // email: user.email,
-        username: user.username,
+        // username: user.username,
       },
     }),
   },
