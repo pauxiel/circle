@@ -129,8 +129,10 @@ function EditCommProfile() {
                   required: { value: true, message: 'please input your bio' },
                 })}
               ></textarea>
-              {errors.bio && (
-                <p className="text-red-500 my-2 italic">{errors.bio.message}</p>
+              {errors.commAbout && (
+                <p className="text-red-500 my-2 italic">
+                  {errors.commAbout.message}
+                </p>
               )}
             </div>
 
