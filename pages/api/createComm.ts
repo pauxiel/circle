@@ -18,11 +18,11 @@ export default async function (req, res) {
       commAbout,
       communityAdmin: {
         create: {
+          // @ts-ignore
           id: session.user.id,
           admin: {
             connect: { email: session.user.email },
             // create: { id: session.user.id },
-            
           },
         },
       },

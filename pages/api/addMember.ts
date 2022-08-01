@@ -34,6 +34,7 @@ export default async function (req, res) {
 
     data: {
       members: {
+        // @ts-ignore
         set: [{ id: session.user.id }],
       },
     },

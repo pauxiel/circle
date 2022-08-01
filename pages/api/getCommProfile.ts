@@ -13,6 +13,7 @@ export default async function (req, res) {
 
   const getCommProfile = await prisma.community.findUnique({
     where: {
+      // @ts-ignore
       adminId: session.user.id,
     },
 

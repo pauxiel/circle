@@ -60,8 +60,8 @@ export const authOptions = {
       ...session,
       user: {
         ...session.user,
-        // id: user.id,
-        id: token.uid,
+        id: user.id,
+        // id: token.uid,
         // email: user.email,
         username: user.username,
       },
