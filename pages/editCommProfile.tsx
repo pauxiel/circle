@@ -18,13 +18,18 @@ import Spotify from '../asset/spotify.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 
+type Inputs = {
+  commName: string
+  commAbout: string
+}
+
 function EditCommProfile() {
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<Inputs>({
     mode: 'all',
   })
 
@@ -116,8 +121,8 @@ function EditCommProfile() {
                 About
               </label>
               <textarea
-                rows="4"
-                cols="50"
+                rows={4}
+                cols={50}
                 className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none "
                 placeholder="Eg. I’m a Web developer, currently based in Nigeria"
                 {...register('commAbout', {
