@@ -8,6 +8,8 @@ import { useRouter } from 'next/router'
 import useToggle from '../hooks/useToggle'
 import CreateProvider from '../context/contextCreate'
 import FadeIn from 'react-fade-in'
+import { useSession, signOut, getSession } from 'next-auth/react'
+import prisma from '../lib/prisma'
 
 function communities() {
   const {
@@ -17,7 +19,6 @@ function communities() {
     formState: { errors, isValid },
   } = useForm()
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
 
   const onSubmitForm = async (values) => {
     const addUser: AxiosRequestConfig = {
@@ -29,19 +30,16 @@ function communities() {
       },
     }
 
-    const res = await axios(addUser);
+    const res = await axios(addUser)
     if (res.status === 200) {
       console.log('yes')
     }
-
-
-
-
-
   }
   const { on, toggler } = useToggle()
 
   const { data: communities, error } = useSWR('/api/fetchAllCom', fetcher)
+
+  const { data: profile, error: err } = useSWR('/api/getUserProfile', fetcher)
 
   const [communitiesNum, setCommunitiesNum] = useState<number>(10)
 
@@ -49,19 +47,27 @@ function communities() {
     setCommunitiesNum((prevCommNum) => prevCommNum + 10)
   }
 
-  if (error) return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
-  <h1 className="text-3xl font-bold italic">Failed to Load...</h1>
-  </div>
+  if (error)
+    return (
+      <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+        <h1 className="text-3xl font-bold italic">Failed to Load...</h1>
+      </div>
+    )
 
-  if (!communities) return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
-  <h1 className="text-3xl font-bold italic">Loading...</h1>
-  </div>
+  if (!communities || !profile)
+    return (
+      <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+        <h1 className="text-3xl font-bold italic">Loading...</h1>
+      </div>
+    )
 
   return (
     <>
-      <CommButton toggler={toggler} />
+      {profile.userCategory === 'Active Member' ? undefined : (
+        <CommButton toggler={toggler} />
+      )}
+      {/* <CommButton toggler={toggler} /> */}
 
-      {/* <button type = 'button' toggler={toggler} >Submit</button> */}
       <CreateProvider>
         {on && <CreateCommModal toggler={toggler} />}
       </CreateProvider>
@@ -72,22 +78,15 @@ function communities() {
             <h1>{community.commName}</h1>
             <p>{community.commType}</p>
             <p>{community.commAbout}</p>
-            <form action="" onSubmit = {handleSubmit(onSubmitForm)}>
-            {/* <input
-              type="hidden"
-              defaultValue={community.id}
-              {...register('commId')}
-            /> */}
+            <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+              <input
+                type="hidden"
+                defaultValue={community.adminId}
+                {...register('commAdmin')}
+              />
 
-               <input
-              type="hidden"
-              defaultValue={community.adminId}
-              {...register('commAdmin')}
-            />
-
-            <button type = 'submit'>Join community</button>
+              <button type="submit">Join community</button>
             </form>
-            
           </div>
         ))}
       </FadeIn>

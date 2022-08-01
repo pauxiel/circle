@@ -198,7 +198,11 @@ function Onboarding() {
           </section>
         )
       case 'onboarding':
-        return <h1>loading</h1>
+        return (
+          <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+            <h1 className="text-3xl font-bold italic">Loading...</h1>
+          </div>
+        )
 
       case 'success':
         return (

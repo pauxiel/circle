@@ -77,17 +77,21 @@ function LeftSidebar() {
         <div className="setting mt-auto">
           <Link href="/about">
             <div className="profile flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
-              <Image
-                src={
-                  session?.user?.image === null
-                    ? Malemoji
-                    : session?.user?.image
-                }
-                alt="the profile image preview"
-                className="rounded-full"
-                width={30}
-                height={30}
-              />
+              {(session?.user?.image === null
+                ? Malemoji
+                : session?.user?.image) && (
+                <Image
+                  src={
+                    session?.user?.image === null
+                      ? Malemoji
+                      : session?.user?.image
+                  }
+                  alt="the profile image preview"
+                  className="rounded-full"
+                  width={30}
+                  height={30}
+                />
+              )}
 
               <span>Profile</span>
             </div>
