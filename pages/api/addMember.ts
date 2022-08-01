@@ -34,7 +34,7 @@ export default async function (req, res) {
 
     data: {
       members: {
-        set: [{ id: session?.user?.id }],
+        set: [{ id: session.user.id }],
       },
     },
   })

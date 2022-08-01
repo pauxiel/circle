@@ -56,11 +56,12 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   callbacks: {
-    session: ({ session, user }) => ({
+    session: ({ session, user, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
+        // id: user.id,
+        id: token.uid,
         // email: user.email,
         username: user.username,
       },
