@@ -109,9 +109,9 @@ function EditCommProfile() {
                 })}
               />
 
-              {errors.username && (
+              {errors.commName && (
                 <p className="text-red-500 my-2 italic">
-                  {errors.username.message}
+                  {errors.commName.message}
                 </p>
               )}
             </div>
