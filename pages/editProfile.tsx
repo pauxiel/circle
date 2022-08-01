@@ -18,13 +18,18 @@ import Spotify from '../asset/spotify.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 
+type Inputs = {
+  username: string
+  bio: string
+}
+
 function EditProfile() {
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<Inputs>({
     mode: 'all',
   })
 

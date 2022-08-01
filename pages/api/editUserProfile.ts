@@ -13,6 +13,7 @@ export default async function (req, res) {
 
   const editUserProfile = await prisma.profile.update({
     where: {
+      // @ts-ignore
       userId: session.user.id,
     },
 

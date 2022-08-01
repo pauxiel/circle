@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 import { getSession } from 'next-auth/react'
+import { string } from 'prop-types'
 
 export default async function (req, res) {
   const { commAdmin } = req.body
@@ -33,6 +34,7 @@ export default async function (req, res) {
 
     data: {
       members: {
+        // @ts-ignore
         set: [{ id: session.user.id }],
       },
     },

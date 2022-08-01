@@ -13,6 +13,7 @@ export default async function (req, res) {
 
   const editComProfile = await prisma.community.update({
     where: {
+      // @ts-ignore
       adminId: session.user.id,
     },
 

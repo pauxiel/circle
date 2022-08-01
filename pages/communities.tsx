@@ -18,7 +18,15 @@ function Communities() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm()
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+  const fetcher = async (
+    input: RequestInfo,
+    init: RequestInit,
+    ...args: any[]
+  ) => {
+    const res = await fetch(input, init)
+    return res.json()
+  }
 
   const onSubmitForm = async (values) => {
     const addUser: AxiosRequestConfig = {
@@ -94,4 +102,4 @@ function Communities() {
   )
 }
 
-export default communities
+export default Communities

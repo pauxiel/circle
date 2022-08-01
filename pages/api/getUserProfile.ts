@@ -13,6 +13,7 @@ export default async function (req, res) {
 
   const getUserProfile = await prisma.profile.findUnique({
     where: {
+      // @ts-ignore
       userId: session.user.id,
     },
 
