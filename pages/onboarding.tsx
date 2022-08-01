@@ -23,7 +23,7 @@ type Inputs = {
   username: string
   interest: string
   bio: string
-  userCategory: any
+  userCategory: string
 }
 
 function Onboarding() {
