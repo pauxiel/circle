@@ -22,7 +22,7 @@ import { useState } from 'react'
 import Logo from '../asset/logo.svg'
 import SignBg from '../asset/signupbg.svg'
 import Flower from '../asset/flower.svg'
-import Pattern from '../asset/pattern.svg'
+// import Pattern from '../asset/pattern.svg'
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -109,7 +109,7 @@ function Login() {
               </div>
             </div>
 
-            <Image src={Pattern.src} alt="the circle app Logo" className="" />
+            {/* <Image src={Pattern.src} alt="the circle app Logo" className="" /> */}
           </div>
 
           <form
