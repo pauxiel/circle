@@ -89,7 +89,7 @@ export default function CreateCommTwo() {
               <div className="flex flex-col space-y-3">
               <label>About Community</label>
               <textarea
-              rows="5"
+              rows={5}
               className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none"
                 placeholder="E.g Design Community bringsd together product designers.."
                 {...register('commAbout', {

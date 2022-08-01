@@ -9,7 +9,14 @@ import ProfileCover from '../asset/coverprofile.svg'
 import Globe from '../asset/globe.svg'
 import Briefcase from '../asset/briefcase.svg'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcher = async (
+  input: RequestInfo,
+  init: RequestInit,
+  ...args: any[]
+) => {
+  const res = await fetch(input, init);
+  return res.json();
+};
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
