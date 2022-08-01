@@ -68,7 +68,7 @@ function LeftSidebar() {
 
           <div className="nav-item flex items-center space-x-3 hover:bg-gray-200 px-2 py-3 rounded-md">
             <Image src={Whatnew} alt="the whatnew icon" className="w-full" />
-            <span>What's New</span>
+            <span>What&apos;res New</span>
           </div>
         </div>
 

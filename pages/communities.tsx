@@ -11,7 +11,7 @@ import FadeIn from 'react-fade-in'
 import { useSession, signOut, getSession } from 'next-auth/react'
 import prisma from '../lib/prisma'
 
-function communities() {
+function Communities() {
   const {
     control,
     register,
