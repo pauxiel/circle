@@ -102,4 +102,4 @@ function Communities() {
   )
 }
 
-export default communities
+export default Communities
