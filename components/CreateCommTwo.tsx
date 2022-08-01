@@ -9,6 +9,12 @@ import CreateCommThree from './CreateCommThree'
 // import img from '../images/2.png'
 // import Image from 'next/image'
 
+type Inputs = {
+  commName: string
+  commType: string
+  commAbout: string
+}
+
 export default function CreateCommTwo() {
   const { navIndex, navHandler } = useNavigation()
   const { state, setState } = useCreate()
@@ -18,7 +24,7 @@ export default function CreateCommTwo() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<Inputs>({
     mode: 'all',
   })
 
@@ -51,64 +57,73 @@ export default function CreateCommTwo() {
         return (
           <div className="px-4 ">
             <div className="mb-4 mt-2">
-          <h1 className="font-bold text-2xl">  Creating New Communities</h1>
-          <span className="text-sm text-gray-400"> By creating communities, you agreed to these</span>
+              <h1 className="font-bold text-2xl"> Creating New Communities</h1>
+              <span className="text-sm text-gray-400">
+                {' '}
+                By creating communities, you agreed to these
+              </span>
             </div>
             <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-3">
-
-            <div className="flex flex-col space-y-3">
-            <label>Community Name</label>
-              <input
-              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
-                placeholder="E.g design Community"
-                {...register('commName', {
-                  required: {
-                    value: true,
-                    message: 'please input your community Name',
-                  },
-                })}
-              />
-
-            </div>
-             
-            <div className="flex flex-col space-y-3">
-              <label>Industry Type</label>
-              <input
-              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
-                placeholder="Type your Industry"
-                {...register('commType', {
-                  required: {
-                    value: true,
-                    message: 'please select your community industry',
-                  },
-                })}
-              />
+              <div className="flex flex-col space-y-3">
+                <label>Community Name</label>
+                <input
+                  className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
+                  placeholder="E.g design Community"
+                  {...register('commName', {
+                    required: {
+                      value: true,
+                      message: 'please input your community Name',
+                    },
+                  })}
+                />
               </div>
-
 
               <div className="flex flex-col space-y-3">
-              <label>About Community</label>
-              <textarea
-              rows={5}
-              className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none"
-                placeholder="E.g Design Community bringsd together product designers.."
-                {...register('commAbout', {
-                  required: {
-                    value: true,
-                    message: 'please select your community industry',
-                  },
-                })}
-              ></textarea>
+                <label>Industry Type</label>
+                <input
+                  className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none "
+                  placeholder="Type your Industry"
+                  {...register('commType', {
+                    required: {
+                      value: true,
+                      message: 'please select your community industry',
+                    },
+                  })}
+                />
               </div>
 
-              <button className="border py-2 px-4 rounded-md bg-blue-600 hover:bg-blue-700 text-white" type="submit">Create Community</button>
+              <div className="flex flex-col space-y-3">
+                <label>About Community</label>
+                <textarea
+                  rows={5}
+                  className="border rounded-md p-2 focus:ring-1 focus:border-blue-700 outline-none"
+                  placeholder="E.g Design Community bringsd together product designers.."
+                  {...register('commAbout', {
+                    required: {
+                      value: true,
+                      message: 'please select your community industry',
+                    },
+                  })}
+                ></textarea>
+              </div>
+
+              <button
+                className="border py-2 px-4 rounded-md bg-blue-600 hover:bg-blue-700 text-white"
+                type="submit"
+              >
+                Create Community
+              </button>
             </form>
           </div>
         )
       case 'uploading':
-        return <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
-        <h1 className="text-3xl font-bold italic">Loading Please Wait...</h1>
-        </div>
+        return (
+          <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+            <h1 className="text-3xl font-bold italic">
+              Loading Please Wait...
+            </h1>
+          </div>
+        )
       case 'success':
         return <CreateCommThree />
     }
