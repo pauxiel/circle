@@ -17,7 +17,7 @@ const useMediaQuery = (width: number) => {
     } else {
       setTargetReached(false)
     }
-  }, [])
+  }, [targetReached])
 
   useEffect(() => {
     const media = window.matchMedia(`(max-width: ${width}px)`)

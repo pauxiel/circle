@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+// import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 import { getSession } from 'next-auth/react'
 
@@ -15,13 +15,21 @@ export default async function (req, res) {
     data: {
       commName,
       commType,
-      // email: session.user.email,
       commAbout,
-      managers : { connect: { email: session.user.email } },
+      communityAdmin: {
+        create: {
+          id: session.user.id,
+          admin: {
+            connect: { email: session.user.email },
+            // create: { id: session.user.id },
+            
+          },
+        },
+      },
     },
   })
 
-//   console.log(profile)
+  //   console.log(profile)
   // console.log(session.user.email)
   return res.status(200).json(community)
 }

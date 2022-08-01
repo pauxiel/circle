@@ -1,19 +1,29 @@
 import React from 'react'
-// import img from '../images/2.png'
-// import Image from 'next/image'
+import Image from 'next/image'
+import Success from '../asset/success.svg'
+import { useRouter } from 'next/router'
 
 export default function CreateCommThree() {
+  const router = useRouter()
   return (
-    <div className="">
+    <div className=" flex flex-col">
       <div className="bg-indigo-300 flex justify-center">
-        {/* <Image src={img} alt="bg" className="w-1/2" /> */}
+        <Image
+          src={Success}
+          alt="the social icons"
+          width={35}
+          height={35}
+          className=""
+        />
       </div>
       <h4 className="flex justify-center text-red-600 font-semibold italic text-xl pt-3">
-        Get your back
+        Community Created
       </h4>
-      <span className="flex justify-center">
-        Set up different measures to start with your life
-      </span>
+      <p>
+        Do more with your new community. Upload a community profile picture and
+        set rules for your community.
+      </p>
+      <button onClick={() => router.push('/aboutCom')}>Start Managing</button>
     </div>
   )
 }

@@ -1,87 +1,95 @@
-// import CreateCommModal from '../components/CreateCommModal'
+import CreateCommModal from '../components/CreateCommModal'
+import CommButton from '../components/CommButton'
 import { useState } from 'react'
+import useSWR from 'swr'
 import { useForm, Controller } from 'react-hook-form'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useRouter } from 'next/router'
+import useToggle from '../hooks/useToggle'
+import CreateProvider from '../context/contextCreate'
+import FadeIn from 'react-fade-in'
+import { useSession, signOut, getSession } from 'next-auth/react'
+import prisma from '../lib/prisma'
 
-function communities() {
+function Communities() {
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
-    mode: 'all',
-  })
-  const [formStep, setFormStep] = useState(0)
-  const completeFormStep = () => {
-    setFormStep((cur) => cur + 1)
-  }
-
-  const router = useRouter()
+  } = useForm()
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
   const onSubmitForm = async (values) => {
-    const createComm: AxiosRequestConfig = {
-      url: '/api/createComm',
+    const addUser: AxiosRequestConfig = {
+      url: '/api/addMember',
       data: values,
-      method: 'post',
+      method: 'patch',
       headers: {
         'Content-Type': 'application/json',
       },
     }
 
-    const res = await axios(createComm)
+    const res = await axios(addUser)
     if (res.status === 200) {
-      router.push('/', '/')
+      console.log('yes')
     }
   }
+  const { on, toggler } = useToggle()
+
+  const { data: communities, error } = useSWR('/api/fetchAllCom', fetcher)
+
+  const { data: profile, error: err } = useSWR('/api/getUserProfile', fetcher)
+
+  const [communitiesNum, setCommunitiesNum] = useState<number>(10)
+
+  const handleLoadMoreComm = () => {
+    setCommunitiesNum((prevCommNum) => prevCommNum + 10)
+  }
+
+  if (error)
+    return (
+      <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+        <h1 className="text-3xl font-bold italic">Failed to Load...</h1>
+      </div>
+    )
+
+  if (!communities || !profile)
+    return (
+      <div className="text-heading space-y-4 flex items-center flex-col justify-center h-screen">
+        <h1 className="text-3xl font-bold italic">Loading...</h1>
+      </div>
+    )
+
   return (
     <>
-      <div className="">
-        <nav className="flex justify-between bg-slate-700 text-white py-4 px-10">
-          <span>Logo</span>
-          <span>☀</span>
-        </nav>
-      </div>
+      {profile.userCategory === 'Active Member' ? undefined : (
+        <CommButton toggler={toggler} />
+      )}
+      {/* <CommButton toggler={toggler} /> */}
 
-      <form onSubmit={handleSubmit(onSubmitForm)}>
-        <label>Community Name</label>
-        <input
-          placeholder="E.g E.g design Community"
-          {...register('commName', {
-            required: {
-              value: true,
-              message: 'please input your community Name',
-            },
-          })}
-        />
+      <CreateProvider>
+        {on && <CreateCommModal toggler={toggler} />}
+      </CreateProvider>
 
-        <label>Industry Type</label>
-        <input
-          placeholder="Select your Industry"
-          {...register('commType', {
-            required: {
-              value: true,
-              message: 'please select your community industry',
-            },
-          })}
-        />
+      <FadeIn>
+        {communities?.slice(0, communitiesNum).map((community: any) => (
+          <div key={community.id}>
+            <h1>{community.commName}</h1>
+            <p>{community.commType}</p>
+            <p>{community.commAbout}</p>
+            <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+              <input
+                type="hidden"
+                defaultValue={community.adminId}
+                {...register('commAdmin')}
+              />
 
-        <label>About Community</label>
-        <input
-          placeholder="E.g Design Community bringsd together product designers.."
-          {...register('commAbout', {
-            required: {
-              value: true,
-              message: 'please select your community industry',
-            },
-          })}
-        />
-
-        <button type="submit">Submit</button>
-      </form>
-
-      {/* <CreateCommModal /> */}
+              <button type="submit">Join community</button>
+            </form>
+          </div>
+        ))}
+      </FadeIn>
     </>
   )
 }
