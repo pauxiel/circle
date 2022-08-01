@@ -19,6 +19,13 @@ import { useSession, signOut, getSession } from 'next-auth/react'
 
 const MAX_STEPS = 2
 
+type Inputs = {
+  username: string
+  interest: string
+  bio: string
+  userCategory: any
+}
+
 function Onboarding() {
   const { data: session } = useSession()
   const {
@@ -26,7 +33,7 @@ function Onboarding() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<Inputs>({
     mode: 'all',
   })
   const [formStep, setFormStep] = useState(0)
@@ -182,8 +189,8 @@ function Onboarding() {
                 Bio:
               </label>
               <textarea
-                rows="4"
-                cols="50"
+                rows={4}
+                cols={50}
                 className="border p-2 rounded-md focus:ring-2 focus:ring-blue-600 outline-none bg-gray-50"
                 placeholder="Eg. I’m a Web developer, currently based in Nigeria"
                 {...register('bio', {
