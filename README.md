@@ -83,5 +83,15 @@ Circcle is amazing Project. here are some yet to be implemented Project🤞
 - Create posts or share useful link **(upcoming)**
 - Post reactions **(upcoming)**
 
+## 🛡️ License
+
+This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) file for details.
+
+
+
+## 🙏 Support
+
+This project needs a ⭐️ from you. Don't forget to leave a star ⭐️
+
 
 
