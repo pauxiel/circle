@@ -78,7 +78,7 @@ npm run dev
 
 ## 🌈 What's next
 
-Slickr is a special project made to empower the amazing hashnode community in the hop to see great articles with beautiful covers. Here are some of my plans ahead for Slickr 🤞
+Circcle is amazing Project. here are some yet to be implemented Project🤞
 
 - Create posts or share useful link **(upcoming)**
 - Post reactions **(upcoming)**
